@@ -7,52 +7,65 @@ window.onload = function(){
   game.onload = function(){
     game.rootScene.backgroundColor = COLOR_ROOT_SCENE_BACKGROUND;
 
-    wall = new Sprite(X_WALL, HEIGHT_GAME);
-    wall.backgroundColor = COLOR_WALL;
-    wall.x = WIDTH_GAME - wall.width;
-    wall.y = 0;
-    game.rootScene.addChild(wall);
+    game.rootScene.addChild(createWall());
 
-    myChara = new Monkey(32, 32);
-    myChara
+    myChara = createMyChara();
     game.rootScene.addChild(myChara);
 
-    bullets = [ 
-                new Bullet((-10 - WIDTH_BULLET), 0), 
-                new Bullet((-10 - WIDTH_BULLET), 0), 
-                new Bullet((-10 - WIDTH_BULLET), 0) 
-              ];
-    for (var i=0; i < bullets.length; i++) {
-      game.rootScene.addChild(bullets[i]);
+    slowBird = new SlowBird();
+    slowBird.x = 0 - WIDTH_SPRITE_BASE;
+    slowBird.y = 10;
+    game.rootScene.addChild(slowBird);
+
+    bulletList = createBulletList();
+    for (var i=0; i < bulletList.bullets.length; i++) {
+      game.rootScene.addChild(bulletList.bullets[i]);
     }
 
-    bulletList = new BulletList(bullets);
-
     game.rootScene.addEventListener("touchstart", function() {
-      if (myChara.x == X_MAX ) {
+      if (myChara.touchingWall()) {
         myChara.kickWall();
       }
     });
 
     myChara.addEventListener("enterframe", function() {
-      if (myChara.x < X_MAX) {
+      if (myChara.inTheAir()) {
         myChara.closeToWall();
       } else {
         myChara.downSlow();
-	if ( this.age % 5 == 0 ){
-	  var bullet = bulletList.pickNonActive();
-	  if (bullet != null) {
+	      if ( this.age % 10 == 0 ){
+	        var bullet = bulletList.pickNonActive();
+	        if (bullet != null) {
             bullet.x = myChara.x + 10;
-	    bullet.y = myChara.y + 10;
-	  }
-	}
+	          bullet.y = myChara.y + 10;
+	        }
+	      }
       }
       bulletList.moveAll();
-    });
-
-    myChara.addEventListener("touchstart", function() {
+      slowBird.move();
     });
   };
 
   game.start();
 };
+
+function createWall(){
+  wall = new Sprite(X_WALL, HEIGHT_GAME);
+  wall.backgroundColor = COLOR_WALL;
+  wall.x = WIDTH_GAME - wall.width;
+  wall.y = 0;
+  return wall;
+}
+
+function createMyChara(){
+  return new Monkey(32, 32);
+}
+
+function createBulletList() {
+  bullets = [ 
+              new Bullet((-10 - WIDTH_BULLET), 0), 
+              new Bullet((-10 - WIDTH_BULLET), 0), 
+              new Bullet((-10 - WIDTH_BULLET), 0) 
+            ];
+  return new BulletList(bullets);
+}

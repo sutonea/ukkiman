@@ -7,6 +7,14 @@ var Monkey = Class.create(Sprite, {
     this.y = 20;
   },
 
+  touchingWall: function() {
+    return myChara.x == X_MAX 
+  },
+
+  inTheAir: function() {
+    return myChara.x < X_MAX;
+  },
+
   downSlow: function() {
     this.y += 2.5;
     this.y = Math.min(this.y, Y_FLOOR);
