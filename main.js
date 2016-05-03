@@ -12,18 +12,19 @@ window.onload = function(){
     myChara = createMyChara();
     game.rootScene.addChild(myChara);
 
-    bullets = createBullets();
-    for (var i=0; i < bullets.length; i++) {
-      game.rootScene.addChild(bullets[i]);
-    }
-
     var enemyes = new Array();
-
     game.rootScene.addEventListener("touchstart", function() {
       if (myChara.touchingWall()) {
         myChara.kickWall();
       }
     });
+
+    bullets = createBullets();
+    for (var i=0; i < bullets.length; i++) {
+      bullets[i].setTargets(enemyes);
+      bullets[i].shooter = myChara;
+      game.rootScene.addChild(bullets[i]);
+    }
 
     myChara.addEventListener("enterframe", function() {
       if (ENEMY_MAP.length > 0 && ENEMY_MAP[0].frame == game.frame) {
@@ -53,21 +54,9 @@ window.onload = function(){
       enemyes.map(function(enemy){
         enemy.move();
       });
-      //slowBird.move();
-      for (var i=0; i<enemyes.length; i++){
-        dbg_alert("dbg i: i:" + i);
-        enemy = enemyes[i];
-        for (var j=0; j<bullets.length; j++){
-          dbg_alert("dbg bulletList.bullets.length:" + bullets.length);
-          dbg_alert("dbg j: j:" + j);
-          bullet = bullets[j]
-          if (enemy.intersect(bullet)) {
-            enemy.damaged();
-            bullet.x = myChara.x;
-            bullet.y = myChara.y;
-          }
-        }
-      }
+      bullets.map(function(bullet){
+        bullet.affectToTargets();
+      });
     });
   };
 
@@ -96,15 +85,3 @@ function createBullets() {
   return bullets;
 }
 
-//function enter(game, enemyEntry) {
-//  // enemyEntry には、EnemyMap.js で生成している連想配列を渡す
-//  if (game.frame == enemyEntry.frame) {
-//    enemyEntry.object.x = enemyEntry.x;
-//    enemyEntry.object.y = enemyEntry.y;
-//    enemyEntry.object.movable = true;
-//  }
-//  console.log("A enemy entered:");
-//  console.log(enemyEntry);
-//  game.rootScene.addChild(enemyEntry.object);
-//  return enemyEntry.object;
-//}
