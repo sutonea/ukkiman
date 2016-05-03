@@ -18,6 +18,7 @@ var SlowBird = Class.create(EnemyBase, {
     }
   },
 
+  //ダメージを受ける
   damaged: function() {
     this.life--;
     if (this.life == 2) {
