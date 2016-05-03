@@ -5,6 +5,7 @@ var Bullet = Class.create(Sprite, {
     this.x = x;
     this.y = y;
     this.speedX = -6;
+    this.speedY = 0;
   },
 
   active: function() {
@@ -14,9 +15,9 @@ var Bullet = Class.create(Sprite, {
   move: function() {
     if (this.active()){
       this.x += this.speedX;
+      this.y += this.speedY;
     }
   }
-
 
 });
 
