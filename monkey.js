@@ -8,11 +8,11 @@ var Monkey = Class.create(Sprite, {
   },
 
   touchingWall: function() {
-    return myChara.x == X_MAX 
+    return this.x == X_MAX 
   },
 
   inTheAir: function() {
-    return myChara.x < X_MAX;
+    return this.x < X_MAX;
   },
 
   downSlow: function() {
@@ -29,7 +29,7 @@ var Monkey = Class.create(Sprite, {
 
   //壁をけってから、再度壁にはりつくまでの動作。
   closeToWall: function() {
-    this.speedX += 0.9;
+    this.speedX += 0.7;
     this.x += this.speedX;
     this.x = Math.min(this.x, X_MAX);
     this.y -= 7;
@@ -38,6 +38,5 @@ var Monkey = Class.create(Sprite, {
   createBullet: function() {
     //return new Bullet(this.x, this.y + 10);
   }
-  
 
 });

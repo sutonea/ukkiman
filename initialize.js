@@ -21,3 +21,9 @@ var X_MAX = WIDTH_GAME - X_WALL - WIDTH_SPRITE_BASE;
 var COLOR_ROOT_SCENE_BACKGROUND = "#222222"
 var COLOR_WALL = "#444400";
 var COLOR_MONKEY = "#BBBB00";
+
+var DBG_ALERT = false;
+
+function dbg_alert(msg){
+  if (DBG_ALERT) { alert(msg) };
+}
