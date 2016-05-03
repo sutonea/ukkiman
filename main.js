@@ -17,7 +17,7 @@ window.onload = function(){
       game.rootScene.addChild(bullets[i]);
     }
 
-    var enemyList = new EnemyList(new Array());
+    var enemyes = new Array();
 
     game.rootScene.addEventListener("touchstart", function() {
       if (myChara.touchingWall()) {
@@ -29,7 +29,7 @@ window.onload = function(){
       if (ENEMY_MAP.length > 0 && ENEMY_MAP[0].frame == game.frame) {
         var gotEnemy = ENEMY_MAP.shift().object;
         gotEnemy.activate();
-        enemyList.enemyes.push( gotEnemy );
+        enemyes.push( gotEnemy );
         game.rootScene.addChild( gotEnemy );
       }
 
@@ -50,11 +50,13 @@ window.onload = function(){
       bullets.map(function(bullet){
         bullet.move();
       });
-      enemyList.moveAll();
+      enemyes.map(function(enemy){
+        enemy.move();
+      });
       //slowBird.move();
-      for (var i=0; i<enemyList.enemyes.length; i++){
+      for (var i=0; i<enemyes.length; i++){
         dbg_alert("dbg i: i:" + i);
-        enemy = enemyList.enemyes[i];
+        enemy = enemyes[i];
         for (var j=0; j<bullets.length; j++){
           dbg_alert("dbg bulletList.bullets.length:" + bullets.length);
           dbg_alert("dbg j: j:" + j);
