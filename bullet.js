@@ -4,7 +4,7 @@ var Bullet = Class.create(Sprite, {
     this.backgroundColor = "#BBBB00";
     this.x = x;
     this.y = y;
-    this.speedX = -6;
+    this.speedX = 0;
     this.speedY = 0;
   },
 
@@ -20,25 +20,3 @@ var Bullet = Class.create(Sprite, {
   }
 
 });
-
-var BulletList = function(bullets) {
-  this.bullets = bullets;
-};
-
-BulletList.prototype.pickNonActive = function(){
-  for (var i=0; i<this.bullets.length; i++) {
-    if (!this.bullets[i].active()) {
-      return this.bullets[i];
-    }
-  }
-  return null;
-}
-
-BulletList.prototype.moveAll = function(){
-  for (var i=0; i<this.bullets.length; i++) {
-    if (this.bullets[i].active()) {
-      this.bullets[i].move();
-    }
-  }
-  return null;
-}

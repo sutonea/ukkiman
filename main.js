@@ -12,9 +12,9 @@ window.onload = function(){
     myChara = createMyChara();
     game.rootScene.addChild(myChara);
 
-    bulletList = createBulletList();
-    for (var i=0; i < bulletList.bullets.length; i++) {
-      game.rootScene.addChild(bulletList.bullets[i]);
+    bullets = createBullets();
+    for (var i=0; i < bullets.length; i++) {
+      game.rootScene.addChild(bullets[i]);
     }
 
     var enemyList = new EnemyList(new Array());
@@ -38,24 +38,27 @@ window.onload = function(){
       } else {
         myChara.downSlow();
 	      if ( this.age % 10 == 0 ){
-	        var bullet = bulletList.pickNonActive();
-          //TODO enemyBulletList を作る。BulletListを汎化するとよさそう。要検討
+	        var bullet = bullets.find(function(bullet){
+            return !bullet.active();
+          });
 	        if (bullet != null) {
             bullet.x = myChara.x + 10;
 	          bullet.y = myChara.y + 10;
 	        }
 	      }
       }
-      bulletList.moveAll();
+      bullets.map(function(bullet){
+        bullet.move();
+      });
       enemyList.moveAll();
       //slowBird.move();
       for (var i=0; i<enemyList.enemyes.length; i++){
         dbg_alert("dbg i: i:" + i);
         enemy = enemyList.enemyes[i];
-        for (var j=0; j<bulletList.bullets.length; j++){
-          dbg_alert("dbg bulletList.bullets.length:" + bulletList.bullets.length);
+        for (var j=0; j<bullets.length; j++){
+          dbg_alert("dbg bulletList.bullets.length:" + bullets.length);
           dbg_alert("dbg j: j:" + j);
-          bullet = bulletList.bullets[j]
+          bullet = bullets[j]
           if (enemy.intersect(bullet)) {
             enemy.damaged();
             bullet.x = myChara.x;
@@ -81,13 +84,14 @@ function createMyChara(){
   return new Monkey(32, 32);
 }
 
-function createBulletList() {
+function createBullets() {
   bullets = [ 
               new Bullet((-10 - WIDTH_BULLET), 0), 
               new Bullet((-10 - WIDTH_BULLET), 0), 
               new Bullet((-10 - WIDTH_BULLET), 0) 
             ];
-  return new BulletList(bullets);
+  bullets.map(function(bullet){bullet.speedX = -6;});
+  return bullets;
 }
 
 //function enter(game, enemyEntry) {
