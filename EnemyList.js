@@ -5,7 +5,7 @@ var EnemyList = function(enemyes) {
 EnemyList.prototype.moveAll = function(){
   for (var i=0; i<this.enemyes.length; i++) {
     if (this.enemyes[i].active()) {
-      this.enemyes[i].move();
+      this.enemyes[i].enterFrame();
     }
   }
   return null;

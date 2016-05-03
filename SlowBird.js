@@ -4,7 +4,10 @@ var SlowBird = Class.create(EnemyBase, {
     this.backgroundColor = "#992222";
     this.life = 3;
     this.hasBullet = true;
-  //  this.moves.push(this.moveRightSlow);
+  },
+
+  enterFrame: function() {
+    this.move();
   },
 
   move: function() {
