@@ -26,12 +26,14 @@ window.onload = function(){
       game.rootScene.addChild(bullets[i]);
     }
 
+    var enemyEntry = ENEMY_MAP.shift();
     myChara.addEventListener("enterframe", function() {
-      if (ENEMY_MAP.length > 0 && ENEMY_MAP[0].frame == game.frame) {
-        var gotEnemy = ENEMY_MAP.shift().object;
+      if (enemyEntry != null && enemyEntry.frame == game.frame) {
+        var gotEnemy = enemyEntry.object;
         gotEnemy.activate();
         enemyes.push( gotEnemy );
         game.rootScene.addChild( gotEnemy );
+        enemyEntry = ENEMY_MAP.shift();
       }
 
       if (myChara.inTheAir()) {
