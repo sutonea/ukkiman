@@ -48,14 +48,10 @@ window.onload = function(){
 	        }
 	      }
       }
-      bullets.map(function(bullet){
-        bullet.move();
-      });
-      enemyes.map(function(enemy){
-        enemy.move();
-      });
-      bullets.map(function(bullet){
-        bullet.affectToTargets();
+      var gameObjects = enemyes.concat(bullets);
+      gameObjects.map(function(obj){
+        obj.move();
+        obj.affectToTargets();
       });
     });
   };

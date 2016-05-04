@@ -26,6 +26,9 @@ var EnemyBase = Class.create(Sprite, {
     return this.movable;
   },
 
+  affectToTargets: function() {
+  },
+
   moveRightSlow: function() {
     this.x += 0.3;
     this.x = Math.min(this.x, X_MAX + HEIGHT_SPRITE_BASE + X_WALL);
