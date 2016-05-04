@@ -26,14 +26,13 @@ window.onload = function(){
       game.rootScene.addChild(bullets[i]);
     }
 
-    var enemyEntry = ENEMY_MAP.shift();
+    var nextEnemy = ENEMY_MAP.shift();
     myChara.addEventListener("enterframe", function() {
-      if (enemyEntry != null && enemyEntry.frame == game.frame) {
-        var gotEnemy = enemyEntry.object;
-        gotEnemy.activate();
-        enemyes.push( gotEnemy );
-        game.rootScene.addChild( gotEnemy );
-        enemyEntry = ENEMY_MAP.shift();
+      if (nextEnemy != null && nextEnemy.appearsAt == game.frame) {
+        nextEnemy.activate();
+        enemyes.push( nextEnemy );
+        game.rootScene.addChild( nextEnemy );
+        nextEnemy = ENEMY_MAP.shift();
       }
 
       if (myChara.inTheAir()) {

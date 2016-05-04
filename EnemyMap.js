@@ -5,18 +5,17 @@ var ENEMY_MAP = new Array();
 // その時の位置は、x座標:0 y座標:30
 // {frame: 60*3, object: new SlowBird(), x: 0 , y: 30}
 
-ENEMY_MAP.push({frame: 60 *  1, object: new SlowBird(0,  30)});
-ENEMY_MAP.push({frame: 60 *  3, object: new SlowBird(0,  60)});
-ENEMY_MAP.push({frame: 60 *  5, object: new SlowBird(0,  90)});
+ENEMY_MAP.push( new SlowBird(0,  30, 60 *  1    ) );
+ENEMY_MAP.push( new SlowBird(0,  60, 60 *  3    ) );
+ENEMY_MAP.push( new SlowBird(0,  90, 60 *  5    ) );
 
-ENEMY_MAP.push({frame: 60 *  8, object: new SlowBird(0, 200)});
-ENEMY_MAP.push({frame: 60 *  9, object: new SlowBird(0, 150)});
-ENEMY_MAP.push({frame: 60 * 10, object: new SlowBird(0, 100)});
+ENEMY_MAP.push( new SlowBird(0, 200, 60 *  8    ) );
+ENEMY_MAP.push( new SlowBird(0, 150, 60 *  9    ) );
+ENEMY_MAP.push( new SlowBird(0, 100, 60 * 10    ) );
 
-
-ENEMY_MAP.push({frame: 60 * 13    , object: new SlowBird(0,   0)});
-ENEMY_MAP.push({frame: 60 * 13 + 1, object: new SlowBird(0,  40)});
-ENEMY_MAP.push({frame: 60 * 13 + 2, object: new SlowBird(0,  80)});
-ENEMY_MAP.push({frame: 60 * 13 + 3, object: new SlowBird(0, 120)});
-ENEMY_MAP.push({frame: 60 * 13 + 4, object: new SlowBird(0, 160)});
-ENEMY_MAP.push({frame: 60 * 13 + 5, object: new SlowBird(0, 200)});
+ENEMY_MAP.push( new SlowBird(0,   0, 60 * 13    ) );
+ENEMY_MAP.push( new SlowBird(0,  40, 60 * 13 + 1) );
+ENEMY_MAP.push( new SlowBird(0,  80, 60 * 13 + 2) );
+ENEMY_MAP.push( new SlowBird(0, 120, 60 * 13 + 3) );
+ENEMY_MAP.push( new SlowBird(0, 160, 60 * 13 + 4) );
+ENEMY_MAP.push( new SlowBird(0, 200, 60 * 13 + 5) );
