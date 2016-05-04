@@ -27,7 +27,7 @@ window.onload = function(){
     }
 
     var nextEnemy = ENEMY_MAP.shift();
-    myChara.addEventListener("enterframe", function() {
+    game.rootScene.addEventListener("enterframe", function() {
       if (nextEnemy != null && nextEnemy.appearsAt == game.frame) {
         nextEnemy.activate();
         enemyes.push( nextEnemy );
