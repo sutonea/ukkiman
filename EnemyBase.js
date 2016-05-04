@@ -1,6 +1,7 @@
 var EnemyBase = Class.create(Sprite, {
-  initialize: function(xAtEnter, yAtEnter){
+  initialize: function(xAtEnter, yAtEnter, appearsAt){
     Sprite.call(this, WIDTH_SPRITE_BASE, HEIGHT_SPRITE_BASE);
+    this.appearsAt = appearsAt;
     this.deactivate();
 
     this.xAtEnter = xAtEnter;

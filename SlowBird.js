@@ -1,6 +1,6 @@
 var SlowBird = Class.create(EnemyBase, {
-  initialize: function(XAtEnter, YAtEnter){
-    EnemyBase.call(this, XAtEnter, YAtEnter);
+  initialize: function(XAtEnter, YAtEnter, appearsAt){
+    EnemyBase.call(this, XAtEnter, YAtEnter, appearsAt);
     this.backgroundColor = "#992222";
     this.life = 3;
     this.hasBullet = true;
